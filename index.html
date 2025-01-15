@@ -111,10 +111,17 @@
         const nextSkillButton = document.getElementById('next-skill');
         let currentSlideIndex = 0;
 
-        function updateSkillSlides() {
+        function updateSkillSlides(direction) {
             slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlideIndex);
+                slide.classList.remove('active');
+                if (index === currentSlideIndex) {
+                    slide.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+                }
             });
+
+            slides[currentSlideIndex].classList.add('active');
+            slides[currentSlideIndex].style.transform = 'translateX(0)';
+
             prevSkillButton.disabled = currentSlideIndex === 0;
             nextSkillButton.disabled = currentSlideIndex === slides.length - 1;
         }
@@ -122,14 +129,14 @@
         prevSkillButton.addEventListener('click', () => {
             if (currentSlideIndex > 0) {
                 currentSlideIndex--;
-                updateSkillSlides();
+                updateSkillSlides('prev');
             }
         });
 
         nextSkillButton.addEventListener('click', () => {
             if (currentSlideIndex < slides.length - 1) {
                 currentSlideIndex++;
-                updateSkillSlides();
+                updateSkillSlides('next');
             }
         });
 

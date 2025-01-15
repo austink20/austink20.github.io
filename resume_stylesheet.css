@@ -49,16 +49,20 @@ header h1 {
 }
 
 .slide {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     opacity: 0;
+    visibility: hidden;
     transform: translateX(100%);
     transition: all 0.5s ease;
 }
 
 .slide.active {
-    display: block;
     opacity: 1;
     transform: translateX(0);
+    visibility: visible;
 }
 
 .pagination {
